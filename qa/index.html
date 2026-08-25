@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Interstice Digital — API documentation</title>
+  <!--
+    Landing page for the published API docs site. Hand-written and checked in
+    at docs/partner/site-index.html; .github/workflows/partner-docs.yml copies
+    it to the site root. Everything else on the site is generated.
+
+    Adding a section = adding one <a class="card"> below. Keep it
+    self-contained: no external CSS, no fonts, no images — the page must render
+    from a bare static host with nothing else fetched.
+  -->
+  <style>
+    :root {
+      color-scheme: light dark;
+      --paper: #fbfaf8;
+      --ink: #17161a;
+      --muted: #6b6560;
+      --line: #e4e0da;
+      --card: #ffffff;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --paper: #16151a;
+        --ink: #f3f1ee;
+        --muted: #a09a94;
+        --line: #2c2a30;
+        --card: #1e1d23;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 4rem 1.5rem 6rem;
+      background: var(--paper);
+      color: var(--ink);
+      font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    main { max-width: 46rem; margin: 0 auto; }
+    h1 { font-size: 1.75rem; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 0.5rem; }
+    .lede { color: var(--muted); margin: 0 0 3rem; max-width: 34rem; }
+    h2 {
+      font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--muted); margin: 0 0 1rem;
+    }
+    .card {
+      display: block; padding: 1.25rem 1.5rem; margin-bottom: 0.75rem;
+      background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+      text-decoration: none; color: inherit;
+    }
+    .card:hover { border-color: var(--ink); }
+    .card h3 { font-size: 1.05rem; font-weight: 600; margin: 0 0 0.25rem; }
+    .card p { margin: 0; color: var(--muted); font-size: 0.9375rem; }
+    .card .also { margin-top: 0.5rem; font-size: 0.875rem; }
+    footer { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.875rem; }
+    a { color: inherit; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Interstice Digital API documentation</h1>
+    <p class="lede">
+      Reference documentation for the interfaces Interstice Digital exposes to
+      counterparties and integrators. Access credentials and the hostname for
+      your environment are issued at onboarding.
+    </p>
+
+    <h2>Sections</h2>
+
+    <a class="card" href="counterparty/">
+      <h3>Counterparty API</h3>
+      <p>
+        Quote, trade and settlement endpoints for counterparties on the swap
+        plane, plus the Convene order venue.
+      </p>
+      <p class="also">
+        Opens the swap reference; the venue plane is at
+        <code>counterparty/convene.html</code>.
+      </p>
+    </a>
+
+    <footer>
+      Generated from the published API contracts. Endpoints not documented here
+      are internal and are not part of the counterparty interface.
+    </footer>
+  </main>
+</body>
+</html>
