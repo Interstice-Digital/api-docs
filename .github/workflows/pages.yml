@@ -1,0 +1,48 @@
+name: Pages
+
+# Publishes the repository contents as-is to GitHub Pages.
+#
+# There is no build: every file here is generated in the canton-swap monorepo
+# by .github/workflows/partner-docs.yml and force-synced into this repo. This
+# workflow exists only to turn the committed tree into a deployment.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v7
+
+      # .github and README.md are repository machinery, not site content.
+      # Everything else — index.html, counterparty/, qa/ — is published exactly
+      # as committed.
+      - name: Stage site
+        run: |
+          set -euo pipefail
+          mkdir -p _site
+          find . -mindepth 1 -maxdepth 1 \
+            ! -name .git ! -name .github ! -name _site ! -name README.md \
+            -exec cp -R {} _site/ \;
+          find _site -type f
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+      - id: deploy
+        uses: actions/deploy-pages@v4
